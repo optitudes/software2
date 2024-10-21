@@ -33,6 +33,15 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $with = ['role','orders'];
+
+    public function role(){
+        return $this->belongsTo(Role::class,'role_id');
+    }
+    public function orders(){
+        return $this->hasMany(Order::class,'user_id');
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -45,4 +54,5 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    
 }
